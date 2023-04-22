@@ -5,8 +5,6 @@ import datasets
 import jax
 import jax.numpy as jnp
 from datasets import concatenate_datasets, load_dataset
-from flax.core.frozen_dict import freeze
-from jax.experimental.compilation_cache import compilation_cache as cc
 from jax.sharding import PartitionSpec as P
 from transformers import WhisperConfig, WhisperProcessor
 
@@ -89,7 +87,6 @@ def main():
         init_params = model.module.init(
             rng,
             input_features=input_features,
-            decoder_input_ids=decoder_input_ids,
             decoder_attention_mask=decoder_attention_mask,
             decoder_position_ids=decoder_position_ids,
             return_dict=False,
